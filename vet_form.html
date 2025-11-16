@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Veterinary Records Confirmation - Big Dogs Don't Cry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bddc-pink: #ff4f8b;
+      --bddc-dark: #1c1b21;
+      --bddc-light: #fff5f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fafafa;
+      color: #222;
+    }
+
+    header {
+      background: var(--bddc-dark);
+      color: white;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-wrap img {
+      height: 40px;
+      width: auto;
+      border-radius: 50%;
+      object-fit: cover;
+      background: white;
+      padding: 2px;
+    }
+
+    .site-title {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      padding: 1.25rem 1.5rem;
+      border-top: 4px solid var(--bddc-pink);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: var(--bddc-dark);
+    }
+
+    .applicant-info {
+      background: var(--bddc-light);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .applicant-info div {
+      margin-bottom: 0.2rem;
+    }
+
+    .applicant-info strong {
+      color: var(--bddc-dark);
+    }
+
+    form {
+      margin-top: 0.5rem;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .field-row > div {
+      flex: 1 1 220px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 0.55rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.4rem 0.5rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f4f4f4;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    .table-help {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 0.25rem;
+    }
+
+    button[type="submit"] {
+      background: var(--bddc-pink);
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.9;
+    }
+
+    #thankyou {
+      display: none;
+      margin-top: 0.5rem;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      background: #e7ffe7;
+      border: 1px solid #9cd59c;
+      color: #1c5c1c;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        margin: 0.25rem 0.75rem 0.25rem 0;
+      }
+
+      table {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo-wrap">
+    <img src="logo.png" alt="Big Dogs Don't Cry logo" onerror="this.style.display='none'">
+    <div class="site-title">Big Dogs Don't Cry Rescue</div>
+  </div>
+  <nav>
+    <a href="https://www.bigdogsdontcry.com/">Home</a>
+    <a href="https://www.bigdogsdontcry.com/contact-us-now">Contact form</a>
+    <a href="tel:12198411142">Call</a>
+    <a href="mailto:Bigdogsdontcryrescue@gmail.com">Email</a>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+    <h1>Veterinary Records Confirmation</h1>
+    <p>Thank you for helping us confirm medical records for this applicant.</p>
+
+    <div class="applicant-info">
+      <div><strong>Applicant:</strong> <span id="applicantDisplay">Loading...</span></div>
+      <div><strong>Applicant phone:</strong> <span id="phoneDisplay">Loading...</span></div>
+      <div><strong>Pet info (from application):</strong> <span id="petInfoDisplay">Loading...</span></div>
+      <div id="altOwnersRow" style="display:none;">
+        <strong>Alternate owners listed:</strong> <span id="altOwnersDisplay"></span>
+      </div>
+      <div><strong>Application type:</strong> <span id="appTypeDisplay">Unknown</span></div>
+    </div>
+
+    <form id="vetForm">
+      <div class="field-row">
+        <div>
+          <label for="vetClinic">Clinic name</label>
+          <input type="text" id="vetClinic" name="vetClinic" required>
+        </div>
+        <div>
+          <label for="vetEmail">Clinic email</label>
+          <input type="email" id="vetEmail" name="vetEmail" required>
+        </div>
+      </div>
+
+      <!-- Hidden system fields -->
+      <input type="hidden" id="appId" name="appId">
+      <input type="hidden" id="applicant" name="applicant">
+      <input type="hidden" id="applicantPhone" name="applicantPhone">
+      <input type="hidden" id="appType" name="appType">
+      <input type="hidden" id="petCountField" name="petCount">
+      <input type="hidden" name="formType" value="vet">
+
+      <p class="table-help">
+        For each pet, please type the pet name and indicate if they are
+        up to date, have no record, or are past due for each item.
+      </p>
+
+      <table>
+        <thead>
+        <tr>
+          <th>Pet Name</th>
+          <th>Altered</th>
+          <th>Rabies</th>
+          <th>Distemper</th>
+          <th>Heartworm</th>
+        </tr>
+        </thead>
+        <tbody id="petRowsBody">
+        <!-- rows added by script -->
+        </tbody>
+      </table>
+
+      <button type="submit">Submit records</button>
+      <div id="thankyou">
+        Thank you. Your response has been submitted.
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+  const SCRIPT_URL = 'YOUR_SCRIPT_URL_HERE';
+
+  function getQueryParams() {
+    const params = {};
+    const qs = window.location.search.substring(1);
+    if (!qs) return params;
+    qs.split('&').forEach(pair => {
+      const [k, v] = pair.split('=');
+      if (!k) return;
+      params[decodeURIComponent(k)] = decodeURIComponent(v || '');
+    });
+    return params;
+  }
+
+  function createStatusSelect(name) {
+    const sel = document.createElement('select');
+    sel.name = name;
+    sel.required = false;
+    sel.innerHTML = `
+      <option value="">Select</option>
+      <option value="Up to date">Up to date</option>
+      <option value="No record">No record</option>
+      <option value="Past due">Past due</option>
+    `;
+    return sel;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const q = getQueryParams();
+
+    const applicantName = q.applicant_name || q.applicant || '';
+    const applicantPhone = q.applicant_phone || '';
+    const petInfo = q.pet_info || q.pet || ''; // column P string
+    const altOwners = q.alt_owners || '';       // column T for adoption
+    const appId = q.appId || '';
+    const appType = (q.appType || 'adoption').toLowerCase();
+
+    document.getElementById('applicantDisplay').textContent = applicantName || 'Unknown';
+    document.getElementById('phoneDisplay').textContent = applicantPhone || 'Unknown';
+    document.getElementById('petInfoDisplay').textContent = petInfo || 'Not provided';
+    document.getElementById('appTypeDisplay').textContent =
+      appType === 'foster' ? 'Foster application' : 'Adoption application';
+
+    if (appType === 'adoption' && altOwners) {
+      document.getElementById('altOwnersDisplay').textContent = altOwners;
+      document.getElementById('altOwnersRow').style.display = 'block';
+    }
+
+    document.getElementById('applicant').value = applicantName;
+    document.getElementById('applicantPhone').value = applicantPhone;
+    document.getElementById('appId').value = appId;
+    document.getElementById('appType').value = appType;
+
+    // Determine petCount:
+    // adoption: take from query petCount (column O)
+    // foster: default to 5 unless petCount is specified explicitly
+    let petCount = 0;
+    if (appType === 'adoption') {
+      petCount = parseInt(q.petCount || '1', 10);
+      if (!petCount || petCount < 1) petCount = 1;
+    } else {
+      petCount = parseInt(q.petCount || '5', 10);
+      if (!petCount || petCount < 1) petCount = 5;
+    }
+    document.getElementById('petCountField').value = String(petCount);
+
+    const tbody = document.getElementById('petRowsBody');
+
+    for (let i = 1; i <= petCount; i++) {
+      const tr = document.createElement('tr');
+
+      const tdName = document.createElement('td');
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.name = 'petName_' + i;
+      tdName.appendChild(nameInput);
+
+      const tdAltered = document.createElement('td');
+      tdAltered.appendChild(createStatusSelect('altered_' + i));
+
+      const tdRabies = document.createElement('td');
+      tdRabies.appendChild(createStatusSelect('rabies_' + i));
+
+      const tdDistemper = document.createElement('td');
+      tdDistemper.appendChild(createStatusSelect('distemper_' + i));
+
+      const tdHeartworm = document.createElement('td');
+      tdHeartworm.appendChild(createStatusSelect('heartworm_' + i));
+
+      tr.appendChild(tdName);
+      tr.appendChild(tdAltered);
+      tr.appendChild(tdRabies);
+      tr.appendChild(tdDistemper);
+      tr.appendChild(tdHeartworm);
+
+      tbody.appendChild(tr);
+    }
+
+    const form = document.getElementById('vetForm');
+    form.addEventListener('submit', evt => {
+      evt.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            form.querySelector('button[type="submit"]').disabled = true;
+            document.getElementById('thankyou').style.display = 'block';
+          } else {
+            alert('There was an error submitting your response. Please try again later.');
+          }
+        })
+        .catch(() => {
+          alert('There was an error submitting your response. Please try again later.');
+        });
+    });
+  });
+</script>
+</body>
+</html>
