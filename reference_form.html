@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reference Form - Big Dogs Don't Cry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bddc-pink: #ff4f8b;
+      --bddc-dark: #1c1b21;
+      --bddc-light: #fff5f8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fafafa;
+      color: #222;
+    }
+
+    header {
+      background: var(--bddc-dark);
+      color: white;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-wrap img {
+      height: 40px;
+      width: auto;
+      border-radius: 50%;
+      object-fit: cover;
+      background: white;
+      padding: 2px;
+    }
+
+    .site-title {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 1.5rem auto;
+      padding: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      padding: 1.25rem 1.5rem;
+      border-top: 4px solid var(--bddc-pink);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: var(--bddc-dark);
+    }
+
+    .applicant-info {
+      background: var(--bddc-light);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .applicant-info strong {
+      color: var(--bddc-dark);
+    }
+
+    form {
+      margin-top: 0.5rem;
+    }
+
+    .question {
+      margin-bottom: 0.9rem;
+    }
+
+    .question label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .question small {
+      display: block;
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .field-row > div {
+      flex: 1 1 200px;
+    }
+
+    button[type="submit"] {
+      background: var(--bddc-pink);
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.9;
+    }
+
+    #thankyou {
+      display: none;
+      margin-top: 0.5rem;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      background: #e7ffe7;
+      border: 1px solid #9cd59c;
+      color: #1c5c1c;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        margin: 0.25rem 0.75rem 0.25rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo-wrap">
+    <!-- Replace logo.png with a direct logo URL if you prefer -->
+    <img src="logo.png" alt="Big Dogs Don't Cry logo" onerror="this.style.display='none'">
+    <div class="site-title">Big Dogs Don't Cry Rescue</div>
+  </div>
+  <nav>
+    <a href="https://www.bigdogsdontcry.com/">Home</a>
+    <a href="https://www.bigdogsdontcry.com/contact-us-now">Contact form</a>
+    <a href="tel:12198411142">Call</a>
+    <a href="mailto:Bigdogsdontcryrescue@gmail.com">Email</a>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+    <h1>Reference Questionnaire</h1>
+    <p>Thank you for helping us learn more about this potential adopter or foster.</p>
+
+    <div class="applicant-info">
+      <div><strong>Applicant:</strong> <span id="applicantDisplay">Loading...</span></div>
+      <div><strong>Phone:</strong> <span id="phoneDisplay">Loading...</span></div>
+    </div>
+
+    <form id="referenceForm">
+      <div class="field-row">
+        <div class="question">
+          <label>Your Name</label>
+          <input type="text" id="refName" name="refName" required>
+        </div>
+        <div class="question">
+          <label>Your Email</label>
+          <input type="email" id="refEmail" name="refEmail" required>
+        </div>
+      </div>
+
+      <!-- Hidden system fields -->
+      <input type="hidden" id="appId" name="appId">
+      <input type="hidden" id="applicant" name="applicant">
+      <input type="hidden" id="applicantPhone" name="applicantPhone">
+      <input type="hidden" id="formType" name="formType" value="reference">
+
+      <!-- Q1 -->
+      <div class="question">
+        <label for="q1">1. How do you know this applicant?</label>
+        <textarea id="q1" name="q1" required></textarea>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question">
+        <label for="q2">2. How long have you known this applicant?</label>
+        <select id="q2" name="q2" required>
+          <option value="">Select an option</option>
+          <option value="Less than a year">Less than a year</option>
+          <option value="1-2 years">1-2 years</option>
+          <option value="3-5 years">3-5 years</option>
+          <option value="5+ years">5+ years</option>
+        </select>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question">
+        <label for="q3">3. Have you seen how the applicant cares for animals?</label>
+        <select id="q3" name="q3" required>
+          <option value="">Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question">
+        <label for="q4">4. Would you trust the applicant to provide a safe, loving home for a pet?</label>
+        <select id="q4" name="q4" required>
+          <option value="">Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Unsure">Unsure</option>
+        </select>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question">
+        <label for="q5">5. Have you known the applicant to ever return an animal?</label>
+        <select id="q5" name="q5" required>
+          <option value="">Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Unsure">Unsure</option>
+        </select>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question">
+        <label for="q6">6. Do you think the applicant is financially responsible for caring for a pet?</label>
+        <select id="q6" name="q6" required>
+          <option value="">Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Unsure">Unsure</option>
+        </select>
+      </div>
+
+      <!-- Q7 -->
+      <div class="question">
+        <label for="q7">7. Do you know of anything that would cause the applicant to return the adopted pet?</label>
+        <select id="q7" name="q7" required>
+          <option value="">Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Unsure">Unsure</option>
+        </select>
+        <small>If yes, please explain below.</small>
+        <textarea id="q7Explain" name="q7Explain" placeholder="Explain if you answered Yes above."></textarea>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question">
+        <label for="q8">8. Do you think the applicant is prepared to give the animal time to acclimate to the home?</label>
+        <select id="q8" name="q8" required>
+          <option value="">Select an option</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          <option value="Unsure">Unsure</option>
+        </select>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question">
+        <label for="q9">9. Is there anything you think we should know before approving their adoption?</label>
+        <textarea id="q9" name="q9"></textarea>
+      </div>
+
+      <button type="submit">Submit reference</button>
+      <div id="thankyou">
+        Thank you. Your reference has been submitted.
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+  const SCRIPT_URL = 'YOUR_SCRIPT_URL_HERE';
+
+  function getQueryParams() {
+    const params = {};
+    const qs = window.location.search.substring(1);
+    if (!qs) return params;
+    qs.split('&').forEach(pair => {
+      const [k, v] = pair.split('=');
+      if (!k) return;
+      params[decodeURIComponent(k)] = decodeURIComponent(v || '');
+    });
+    return params;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const q = getQueryParams();
+
+    const applicantName = q.applicant_name || q.applicant || '';
+    const applicantPhone = q.applicant_phone || '';
+
+    document.getElementById('applicantDisplay').textContent = applicantName || 'Unknown';
+    document.getElementById('phoneDisplay').textContent = applicantPhone || 'Unknown';
+
+    document.getElementById('applicant').value = applicantName;
+    document.getElementById('applicantPhone').value = applicantPhone;
+    document.getElementById('appId').value = q.appId || '';
+
+    const form = document.getElementById('referenceForm');
+    form.addEventListener('submit', evt => {
+      evt.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            form.querySelector('button[type="submit"]').disabled = true;
+            document.getElementById('thankyou').style.display = 'block';
+          } else {
+            alert('There was an error submitting your response. Please try again later.');
+          }
+        })
+        .catch(() => {
+          alert('There was an error submitting your response. Please try again later.');
+        });
+    });
+  });
+</script>
+</body>
+</html>
