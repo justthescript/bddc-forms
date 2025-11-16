@@ -1,3 +1,4 @@
+<!--Personal Reference Form - Enhanced-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +8,12 @@
   <style>
     :root {
       --bddc-pink: #ff4f8b;
+      --bddc-pink-light: #ff8db3;
       --bddc-dark: #1c1b21;
       --bddc-light: #fff5f8;
+      --bddc-blue: #4a90e2;
+      --bddc-green: #7ed957;
+      --bddc-orange: #ffa726;
     }
 
     * {
@@ -17,41 +22,94 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #fafafa;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #fef5f8 0%, #e3f2fd 100%);
       color: #222;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Playful paw print decorations */
+    body::before,
+    body::after {
+      content: '🐾';
+      position: fixed;
+      font-size: 3rem;
+      opacity: 0.08;
+      z-index: 0;
+    }
+
+    body::before {
+      top: 15%;
+      left: 8%;
+      transform: rotate(-20deg);
+    }
+
+    body::after {
+      bottom: 15%;
+      right: 8%;
+      transform: rotate(25deg);
     }
 
     header {
-      background: var(--bddc-dark);
+      background: linear-gradient(135deg, var(--bddc-dark) 0%, #2d2c35 100%);
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 79, 139, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
     }
 
     .logo-wrap {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      position: relative;
+      z-index: 1;
     }
 
     .logo-wrap img {
-      height: 40px;
-      width: auto;
+      height: 50px;
+      width: 50px;
       border-radius: 50%;
       object-fit: cover;
       background: white;
-      padding: 2px;
+      padding: 3px;
+      border: 3px solid var(--bddc-pink);
+      box-shadow: 0 4px 8px rgba(255, 79, 139, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-wrap img:hover {
+      transform: scale(1.1) rotate(5deg);
     }
 
     .site-title {
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.03em;
-      font-size: 0.95rem;
+      font-size: 1.1rem;
       text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
     }
 
     nav a {
@@ -59,63 +117,140 @@
       text-decoration: none;
       margin-left: 1rem;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: rgba(255, 79, 139, 0.2);
+      transform: translateY(-2px);
     }
 
     main {
-      max-width: 800px;
-      margin: 1.5rem auto;
+      max-width: 850px;
+      margin: 2rem auto;
       padding: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--bddc-pink) 0%, var(--bddc-pink-light) 100%);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 15px 15px 0 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255, 79, 139, 0.3);
+    }
+
+    .hero-banner::before {
+      content: '❤️';
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.15;
+      top: -20px;
+      left: 20px;
+      transform: rotate(-15deg);
+    }
+
+    .hero-banner::after {
+      content: '🐕';
+      position: absolute;
+      font-size: 5rem;
+      opacity: 0.15;
+      bottom: -10px;
+      right: 30px;
+      transform: rotate(10deg);
+    }
+
+    .hero-banner h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-banner p {
+      margin: 0.5rem 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
     }
 
     .card {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-      padding: 1.25rem 1.5rem;
-      border-top: 4px solid var(--bddc-pink);
-    }
-
-    h1 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      color: var(--bddc-dark);
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 2rem 2.5rem;
+      position: relative;
     }
 
     .applicant-info {
-      background: var(--bddc-light);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--bddc-light) 0%, #ffe8f0 100%);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid var(--bddc-pink);
+      box-shadow: 0 3px 10px rgba(255, 79, 139, 0.1);
+      position: relative;
+    }
+
+    .applicant-info::before {
+      content: '👤';
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      opacity: 0.2;
+    }
+
+    .applicant-info div {
+      margin-bottom: 0.3rem;
       font-size: 0.95rem;
     }
 
     .applicant-info strong {
       color: var(--bddc-dark);
+      font-weight: 700;
     }
 
     form {
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
 
     .question {
-      margin-bottom: 0.9rem;
+      margin-bottom: 1.5rem;
+      padding: 1.25rem;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border-left: 4px solid var(--bddc-pink);
+      transition: all 0.3s ease;
+    }
+
+    .question:hover {
+      box-shadow: 0 4px 12px rgba(255, 79, 139, 0.1);
+      transform: translateX(5px);
     }
 
     .question label {
       display: block;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--bddc-dark);
+      font-size: 1rem;
     }
 
     .question small {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #666;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
+      font-style: italic;
     }
 
     input[type="text"],
@@ -124,56 +259,140 @@
     select,
     textarea {
       width: 100%;
-      padding: 0.55rem 0.6rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      padding: 0.75rem 0.9rem;
+      border-radius: 10px;
+      border: 2px solid #e0e0e0;
       font: inherit;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--bddc-pink);
+      box-shadow: 0 0 0 3px rgba(255, 79, 139, 0.1);
+      transform: translateY(-2px);
     }
 
     textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 100px;
+      font-family: inherit;
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ff4f8b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2.5rem;
+      appearance: none;
     }
 
     .field-row {
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       flex-wrap: wrap;
+      margin-bottom: 1.5rem;
     }
 
     .field-row > div {
-      flex: 1 1 200px;
+      flex: 1 1 220px;
+    }
+
+    .field-row .question {
+      margin-bottom: 0;
     }
 
     button[type="submit"] {
-      background: var(--bddc-pink);
+      background: linear-gradient(135deg, var(--bddc-pink) 0%, var(--bddc-pink-light) 100%);
       border: none;
-      border-radius: 999px;
-      padding: 0.7rem 1.6rem;
+      border-radius: 50px;
+      padding: 0.9rem 2.5rem;
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 15px rgba(255, 79, 139, 0.3);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      width: 100%;
     }
 
     button[type="submit"]:hover {
-      opacity: 0.9;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 79, 139, 0.4);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
     #thankyou {
       display: none;
-      margin-top: 0.5rem;
-      padding: 0.9rem 1rem;
-      border-radius: 8px;
-      background: #e7ffe7;
-      border: 1px solid #9cd59c;
+      margin-top: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e7ffe7 0%, #d4f7d4 100%);
+      border: 2px solid #9cd59c;
       color: #1c5c1c;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(126, 217, 87, 0.2);
     }
+
+    #thankyou::before {
+      content: '✅';
+      margin-right: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    /* Question number badges */
+    .question label::before {
+      content: attr(data-number);
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: var(--bddc-pink);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+      font-weight: 700;
+    }
+
+    /* Decorative paw prints */
+    .paw-decoration {
+      position: absolute;
+      opacity: 0.05;
+      font-size: 4rem;
+      pointer-events: none;
+    }
+
+    .paw-1 { top: 15%; right: 2%; transform: rotate(15deg); }
+    .paw-2 { top: 50%; left: 1%; transform: rotate(-25deg); }
+    .paw-3 { bottom: 25%; right: 3%; transform: rotate(20deg); }
 
     @media (max-width: 600px) {
       header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 1rem;
       }
 
       nav {
@@ -182,7 +401,27 @@
       }
 
       nav a {
-        margin: 0.25rem 0.75rem 0.25rem 0;
+        margin: 0.25rem 0.5rem 0.25rem 0;
+      }
+
+      .hero-banner {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .hero-banner h1 {
+        font-size: 1.4rem;
+      }
+
+      .card {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .question {
+        padding: 1rem;
+      }
+
+      button[type="submit"] {
+        padding: 0.9rem 1.5rem;
       }
     }
   </style>
@@ -197,17 +436,23 @@
   </div>
   <nav>
     <a href="https://www.bigdogsdontcry.com/">Home</a>
-    <a href="https://www.bigdogsdontcry.com/contact-us-now">Contact form</a>
+    <a href="https://www.bigdogsdontcry.com/contact-us-now">Contact</a>
     <a href="tel:12198411142">Call</a>
     <a href="mailto:Bigdogsdontcryrescue@gmail.com">Email</a>
   </nav>
 </header>
 
 <main>
-  <div class="card">
-    <h1>Reference Questionnaire</h1>
-    <p>Thank you for helping us learn more about this potential adopter or foster.</p>
+  <div class="paw-decoration paw-1">🐾</div>
+  <div class="paw-decoration paw-2">🐾</div>
+  <div class="paw-decoration paw-3">🐾</div>
 
+  <div class="hero-banner">
+    <h1>🤝 Reference Questionnaire</h1>
+    <p>Thank you for helping us find the perfect forever homes for our rescues!</p>
+  </div>
+
+  <div class="card">
     <div class="applicant-info">
       <div><strong>Applicant:</strong> <span id="applicantDisplay">Loading...</span></div>
       <div><strong>Phone:</strong> <span id="phoneDisplay">Loading...</span></div>
@@ -217,11 +462,11 @@
       <div class="field-row">
         <div class="question">
           <label>Your Name</label>
-          <input type="text" id="refName" name="refName" required>
+          <input type="text" id="refName" name="refName" required placeholder="Enter your full name">
         </div>
         <div class="question">
           <label>Your Email</label>
-          <input type="email" id="refEmail" name="refEmail" required>
+          <input type="email" id="refEmail" name="refEmail" required placeholder="your.email@example.com">
         </div>
       </div>
 
@@ -233,13 +478,13 @@
 
       <!-- Q1 -->
       <div class="question">
-        <label for="q1">1. How do you know this applicant?</label>
-        <textarea id="q1" name="q1" required></textarea>
+        <label data-number="1">How do you know this applicant?</label>
+        <textarea id="q1" name="q1" required placeholder="Please describe your relationship (e.g., friend, family member, colleague, neighbor)"></textarea>
       </div>
 
       <!-- Q2 -->
       <div class="question">
-        <label for="q2">2. How long have you known this applicant?</label>
+        <label data-number="2">How long have you known this applicant?</label>
         <select id="q2" name="q2" required>
           <option value="">Select an option</option>
           <option value="Less than a year">Less than a year</option>
@@ -251,7 +496,7 @@
 
       <!-- Q3 -->
       <div class="question">
-        <label for="q3">3. Have you seen how the applicant cares for animals?</label>
+        <label data-number="3">Have you seen how the applicant cares for animals?</label>
         <select id="q3" name="q3" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -261,7 +506,7 @@
 
       <!-- Q4 -->
       <div class="question">
-        <label for="q4">4. Would you trust the applicant to provide a safe, loving home for a pet?</label>
+        <label data-number="4">Would you trust the applicant to provide a safe, loving home for a pet?</label>
         <select id="q4" name="q4" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -272,7 +517,7 @@
 
       <!-- Q5 -->
       <div class="question">
-        <label for="q5">5. Have you known the applicant to ever return an animal?</label>
+        <label data-number="5">Have you known the applicant to ever return an animal?</label>
         <select id="q5" name="q5" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -283,7 +528,7 @@
 
       <!-- Q6 -->
       <div class="question">
-        <label for="q6">6. Do you think the applicant is financially responsible for caring for a pet?</label>
+        <label data-number="6">Do you think the applicant is financially responsible for caring for a pet?</label>
         <select id="q6" name="q6" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -294,7 +539,7 @@
 
       <!-- Q7 -->
       <div class="question">
-        <label for="q7">7. Do you know of anything that would cause the applicant to return the adopted pet?</label>
+        <label data-number="7">Do you know of anything that would cause the applicant to return the adopted pet?</label>
         <select id="q7" name="q7" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -302,12 +547,12 @@
           <option value="Unsure">Unsure</option>
         </select>
         <small>If yes, please explain below.</small>
-        <textarea id="q7Explain" name="q7Explain" placeholder="Explain if you answered Yes above."></textarea>
+        <textarea id="q7Explain" name="q7Explain" placeholder="Explain if you answered Yes above (optional)"></textarea>
       </div>
 
       <!-- Q8 -->
       <div class="question">
-        <label for="q8">8. Do you think the applicant is prepared to give the animal time to acclimate to the home?</label>
+        <label data-number="8">Do you think the applicant is prepared to give the animal time to acclimate to the home?</label>
         <select id="q8" name="q8" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -318,13 +563,13 @@
 
       <!-- Q9 -->
       <div class="question">
-        <label for="q9">9. Is there anything you think we should know before approving their adoption?</label>
-        <textarea id="q9" name="q9"></textarea>
+        <label data-number="9">Is there anything you think we should know before approving their adoption?</label>
+        <textarea id="q9" name="q9" placeholder="Any additional comments or concerns (optional)"></textarea>
       </div>
 
-      <button type="submit">Submit reference</button>
+      <button type="submit">Submit Reference 🐾</button>
       <div id="thankyou">
-        Thank you. Your reference has been submitted.
+        Thank you! Your reference has been submitted successfully. Your input helps us ensure our rescues find loving, forever homes!
       </div>
     </form>
   </div>
@@ -373,6 +618,7 @@
           if (data.status === 'ok') {
             form.querySelector('button[type="submit"]').disabled = true;
             document.getElementById('thankyou').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
           } else {
             alert('There was an error submitting your response. Please try again later.');
           }
