@@ -1,3 +1,4 @@
+<!--Vet Reference Form - Enhanced-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,49 +8,106 @@
   <style>
     :root {
       --bddc-pink: #ff4f8b;
+      --bddc-pink-light: #ff8db3;
       --bddc-dark: #1c1b21;
       --bddc-light: #fff5f8;
+      --bddc-blue: #4a90e2;
+      --bddc-green: #7ed957;
+      --bddc-orange: #ffa726;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #fafafa;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #fef5f8 0%, #e3f2fd 100%);
       color: #222;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Playful paw print decorations */
+    body::before,
+    body::after {
+      content: '🐾';
+      position: fixed;
+      font-size: 3rem;
+      opacity: 0.08;
+      z-index: 0;
+    }
+
+    body::before {
+      top: 10%;
+      left: 5%;
+      transform: rotate(-15deg);
+    }
+
+    body::after {
+      bottom: 10%;
+      right: 5%;
+      transform: rotate(25deg);
     }
 
     header {
-      background: var(--bddc-dark);
+      background: linear-gradient(135deg, var(--bddc-dark) 0%, #2d2c35 100%);
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 79, 139, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
     }
 
     .logo-wrap {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      position: relative;
+      z-index: 1;
     }
 
     .logo-wrap img {
-      height: 40px;
-      width: auto;
+      height: 50px;
+      width: 50px;
       border-radius: 50%;
       object-fit: cover;
       background: white;
-      padding: 2px;
+      padding: 3px;
+      border: 3px solid var(--bddc-pink);
+      box-shadow: 0 4px 8px rgba(255, 79, 139, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-wrap img:hover {
+      transform: scale(1.1) rotate(5deg);
     }
 
     .site-title {
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.03em;
-      font-size: 0.95rem;
+      font-size: 1.1rem;
       text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
     }
 
     nav a {
@@ -57,67 +115,119 @@
       text-decoration: none;
       margin-left: 1rem;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: rgba(255, 79, 139, 0.2);
+      transform: translateY(-2px);
     }
 
     main {
-      max-width: 900px;
-      margin: 1.5rem auto;
+      max-width: 950px;
+      margin: 2rem auto;
       padding: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--bddc-pink) 0%, var(--bddc-pink-light) 100%);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 15px 15px 0 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255, 79, 139, 0.3);
+    }
+
+    .hero-banner::before {
+      content: '🐕';
+      position: absolute;
+      font-size: 6rem;
+      opacity: 0.15;
+      top: -20px;
+      right: 20px;
+      transform: rotate(15deg);
+    }
+
+    .hero-banner h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-banner p {
+      margin: 0.5rem 0 0 0;
+      font-size: 1rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
     }
 
     .card {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-      padding: 1.25rem 1.5rem;
-      border-top: 4px solid var(--bddc-pink);
-    }
-
-    h1 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      color: var(--bddc-dark);
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 2rem 2.5rem;
+      position: relative;
     }
 
     .applicant-info {
-      background: var(--bddc-light);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--bddc-light) 0%, #ffe8f0 100%);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
       font-size: 0.95rem;
+      border-left: 5px solid var(--bddc-pink);
+      box-shadow: 0 3px 10px rgba(255, 79, 139, 0.1);
+      position: relative;
+    }
+
+    .applicant-info::before {
+      content: '📋';
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      opacity: 0.2;
     }
 
     .applicant-info div {
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
     }
 
     .applicant-info strong {
       color: var(--bddc-dark);
+      font-weight: 700;
     }
 
     form {
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
 
     .field-row {
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 0.9rem;
+      margin-bottom: 1.25rem;
     }
 
     .field-row > div {
-      flex: 1 1 220px;
+      flex: 1 1 250px;
     }
 
     label {
       display: block;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--bddc-dark);
+      font-size: 0.95rem;
     }
 
     input[type="text"],
@@ -125,70 +235,169 @@
     input[type="email"],
     select {
       width: 100%;
-      padding: 0.55rem 0.6rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      border: 2px solid #e0e0e0;
       font: inherit;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    input[type="email"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--bddc-pink);
+      box-shadow: 0 0 0 3px rgba(255, 79, 139, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .table-section {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border: 2px dashed #ddd;
+    }
+
+    .table-help {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid var(--bddc-blue);
+      position: relative;
+    }
+
+    .table-help::before {
+      content: '💡';
+      margin-right: 0.5rem;
     }
 
     table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       margin-top: 0.5rem;
       margin-bottom: 0.75rem;
       font-size: 0.9rem;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     }
 
     th, td {
-      border: 1px solid #ddd;
-      padding: 0.4rem 0.5rem;
+      border: 1px solid #e0e0e0;
+      padding: 0.75rem 0.6rem;
       text-align: left;
     }
 
     th {
-      background: #f4f4f4;
-      font-weight: 600;
+      background: linear-gradient(135deg, var(--bddc-pink) 0%, var(--bddc-pink-light) 100%);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    tbody tr {
+      transition: background 0.2s ease;
     }
 
     tbody tr:nth-child(even) {
       background: #fafafa;
     }
 
-    .table-help {
+    tbody tr:hover {
+      background: #fff5f8;
+    }
+
+    tbody td {
+      vertical-align: middle;
+    }
+
+    tbody select {
       font-size: 0.85rem;
-      color: #555;
-      margin-bottom: 0.25rem;
+      padding: 0.5rem;
+    }
+
+    tbody input[type="text"] {
+      font-size: 0.9rem;
     }
 
     button[type="submit"] {
-      background: var(--bddc-pink);
+      background: linear-gradient(135deg, var(--bddc-pink) 0%, var(--bddc-pink-light) 100%);
       border: none;
-      border-radius: 999px;
-      padding: 0.7rem 1.6rem;
+      border-radius: 50px;
+      padding: 0.9rem 2.5rem;
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 15px rgba(255, 79, 139, 0.3);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     button[type="submit"]:hover {
-      opacity: 0.9;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 79, 139, 0.4);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(-1px);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
     #thankyou {
       display: none;
-      margin-top: 0.5rem;
-      padding: 0.9rem 1rem;
-      border-radius: 8px;
-      background: #e7ffe7;
-      border: 1px solid #9cd59c;
+      margin-top: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e7ffe7 0%, #d4f7d4 100%);
+      border: 2px solid #9cd59c;
       color: #1c5c1c;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(126, 217, 87, 0.2);
     }
+
+    #thankyou::before {
+      content: '✅';
+      margin-right: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    /* Decorative paw prints */
+    .paw-decoration {
+      position: absolute;
+      opacity: 0.05;
+      font-size: 4rem;
+      pointer-events: none;
+    }
+
+    .paw-1 { top: 20%; left: -2%; transform: rotate(-20deg); }
+    .paw-2 { top: 50%; right: -2%; transform: rotate(15deg); }
+    .paw-3 { bottom: 20%; left: 3%; transform: rotate(30deg); }
 
     @media (max-width: 600px) {
       header {
         flex-direction: column;
         align-items: flex-start;
+        padding: 1rem;
       }
 
       nav {
@@ -197,11 +406,32 @@
       }
 
       nav a {
-        margin: 0.25rem 0.75rem 0.25rem 0;
+        margin: 0.25rem 0.5rem 0.25rem 0;
+      }
+
+      .hero-banner {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .hero-banner h1 {
+        font-size: 1.4rem;
+      }
+
+      .card {
+        padding: 1.5rem 1.25rem;
       }
 
       table {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+      }
+
+      th, td {
+        padding: 0.5rem 0.4rem;
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 0.9rem 1.5rem;
       }
     }
   </style>
@@ -216,17 +446,23 @@
   </div>
   <nav>
     <a href="https://www.bigdogsdontcry.com/">Home</a>
-    <a href="https://www.bigdogsdontcry.com/contact-us-now">Contact form</a>
+    <a href="https://www.bigdogsdontcry.com/contact-us-now">Contact</a>
     <a href="tel:12198411142">Call</a>
     <a href="mailto:Bigdogsdontcryrescue@gmail.com">Email</a>
   </nav>
 </header>
 
 <main>
-  <div class="card">
-    <h1>Veterinary Records Confirmation</h1>
-    <p>Thank you for helping us confirm medical records for this applicant.</p>
+  <div class="paw-decoration paw-1">🐾</div>
+  <div class="paw-decoration paw-2">🐾</div>
+  <div class="paw-decoration paw-3">🐾</div>
 
+  <div class="hero-banner">
+    <h1>🏥 Veterinary Records Confirmation</h1>
+    <p>Thank you for helping us verify this applicant's pet care history!</p>
+  </div>
+
+  <div class="card">
     <div class="applicant-info">
       <div><strong>Applicant:</strong> <span id="applicantDisplay">Loading...</span></div>
       <div><strong>Applicant phone:</strong> <span id="phoneDisplay">Loading...</span></div>
@@ -240,12 +476,12 @@
     <form id="vetForm">
       <div class="field-row">
         <div>
-          <label for="vetClinic">Clinic name</label>
-          <input type="text" id="vetClinic" name="vetClinic" required>
+          <label for="vetClinic">🏢 Clinic Name</label>
+          <input type="text" id="vetClinic" name="vetClinic" required placeholder="Enter clinic name">
         </div>
         <div>
-          <label for="vetEmail">Clinic email</label>
-          <input type="email" id="vetEmail" name="vetEmail" required>
+          <label for="vetEmail">📧 Clinic Email</label>
+          <input type="email" id="vetEmail" name="vetEmail" required placeholder="clinic@example.com">
         </div>
       </div>
 
@@ -257,29 +493,30 @@
       <input type="hidden" id="petCountField" name="petCount">
       <input type="hidden" name="formType" value="vet">
 
-      <p class="table-help">
-        For each pet, please type the pet name and indicate if they are
-        up to date, have no record, or are past due for each item.
-      </p>
+      <div class="table-section">
+        <div class="table-help">
+          For each pet, please enter the pet's name and select their vaccination and medical status.
+        </div>
 
-      <table>
-        <thead>
-        <tr>
-          <th>Pet Name</th>
-          <th>Altered</th>
-          <th>Rabies</th>
-          <th>Distemper</th>
-          <th>Heartworm</th>
-        </tr>
-        </thead>
-        <tbody id="petRowsBody">
-        <!-- rows added by script -->
-        </tbody>
-      </table>
+        <table>
+          <thead>
+          <tr>
+            <th>🐕 Pet Name</th>
+            <th>✂️ Altered</th>
+            <th>💉 Rabies</th>
+            <th>💉 Distemper</th>
+            <th>💊 Heartworm</th>
+          </tr>
+          </thead>
+          <tbody id="petRowsBody">
+          <!-- rows added by script -->
+          </tbody>
+        </table>
+      </div>
 
-      <button type="submit">Submit records</button>
+      <button type="submit">Submit Veterinary Records 🐾</button>
       <div id="thankyou">
-        Thank you. Your response has been submitted.
+        Thank you! Your response has been submitted successfully. We appreciate your help in finding forever homes for these deserving animals!
       </div>
     </form>
   </div>
@@ -306,9 +543,9 @@
     sel.required = false;
     sel.innerHTML = `
       <option value="">Select</option>
-      <option value="Up to date">Up to date</option>
-      <option value="No record">No record</option>
-      <option value="Past due">Past due</option>
+      <option value="Up to date">✅ Up to date</option>
+      <option value="No record">❌ No record</option>
+      <option value="Past due">⚠️ Past due</option>
     `;
     return sel;
   }
@@ -340,8 +577,6 @@
     document.getElementById('appType').value = appType;
 
     // Determine petCount:
-    // adoption: take from query petCount (column O)
-    // foster: default to 5 unless petCount is specified explicitly
     let petCount = 0;
     if (appType === 'adoption') {
       petCount = parseInt(q.petCount || '1', 10);
@@ -361,6 +596,7 @@
       const nameInput = document.createElement('input');
       nameInput.type = 'text';
       nameInput.name = 'petName_' + i;
+      nameInput.placeholder = 'Pet ' + i + ' name';
       tdName.appendChild(nameInput);
 
       const tdAltered = document.createElement('td');
@@ -399,6 +635,7 @@
           if (data.status === 'ok') {
             form.querySelector('button[type="submit"]').disabled = true;
             document.getElementById('thankyou').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
           } else {
             alert('There was an error submitting your response. Please try again later.');
           }
