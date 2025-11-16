@@ -209,7 +209,9 @@
 <body>
 <header>
   <div class="logo-wrap">
-    <img src="logo.png" alt="Big Dogs Don't Cry logo" onerror="this.style.display='none'">
+    <img src="https://justthescript.github.io/bddc-forms/bddc-logo.png"
+         alt="Big Dogs Don't Cry logo"
+         onerror="this.style.display='none'">
     <div class="site-title">Big Dogs Don't Cry Rescue</div>
   </div>
   <nav>
@@ -284,7 +286,7 @@
 </main>
 
 <script>
-  const SCRIPT_URL = 'YOUR_SCRIPT_URL_HERE';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwY0gYJ0LkdQKzomGErOZK0fphmgKFfJW8R_IUGA3LazCJwXjHh4apKR2COT1o5xCHc/exec';
 
   function getQueryParams() {
     const params = {};
@@ -316,8 +318,8 @@
 
     const applicantName = q.applicant_name || q.applicant || '';
     const applicantPhone = q.applicant_phone || '';
-    const petInfo = q.pet_info || q.pet || ''; // column P string
-    const altOwners = q.alt_owners || '';       // column T for adoption
+    const petInfo = q.pet_info || q.pet || '';
+    const altOwners = q.alt_owners || '';
     const appId = q.appId || '';
     const appType = (q.appType || 'adoption').toLowerCase();
 
