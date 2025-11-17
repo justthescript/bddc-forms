@@ -537,6 +537,7 @@
     return params;
   }
 
+  // General status dropdown for vaccines and heartworm
   function createStatusSelect(name) {
     const sel = document.createElement('select');
     sel.name = name;
@@ -546,6 +547,20 @@
       <option value="Up to date">✅ Up to date</option>
       <option value="No record">❌ No record</option>
       <option value="Past due">⚠️ Past due</option>
+    `;
+    return sel;
+  }
+
+  // Specific dropdown for altered status
+  function createAlteredSelect(name) {
+    const sel = document.createElement('select');
+    sel.name = name;
+    sel.required = false;
+    sel.innerHTML = `
+      <option value="">Select</option>
+      <option value="Altered">Altered</option>
+      <option value="Intact">Intact</option>
+      <option value="No record">No record</option>
     `;
     return sel;
   }
@@ -576,7 +591,7 @@
     document.getElementById('appId').value = appId;
     document.getElementById('appType').value = appType;
 
-    // Determine petCount:
+    // Determine petCount
     let petCount = 0;
     if (appType === 'adoption') {
       petCount = parseInt(q.petCount || '1', 10);
@@ -600,7 +615,7 @@
       tdName.appendChild(nameInput);
 
       const tdAltered = document.createElement('td');
-      tdAltered.appendChild(createStatusSelect('altered_' + i));
+      tdAltered.appendChild(createAlteredSelect('altered_' + i));
 
       const tdRabies = document.createElement('td');
       tdRabies.appendChild(createStatusSelect('rabies_' + i));
